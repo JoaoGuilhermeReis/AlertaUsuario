@@ -60,7 +60,7 @@
 
     currentIndex++;
 
-    // Resetar ao final
+    
     if (currentIndex >= items.length) {
       currentIndex = 0;
     }
