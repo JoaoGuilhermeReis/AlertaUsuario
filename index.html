@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alerta de Câmera Ativada - Cybersegurança</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #eee;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+      min-height: 100vh;
+      margin: 0;
+    }
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      background: #ff3b3b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #ff0000;
+    }
+    video, canvas {
+      max-width: 300px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 15px #ff3b3b;
+    }
+    #alert {
+      background: #660000;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      display: none;
+    }
+    #explanation {
+      max-width: 600px;
+      text-align: justify;
+      line-height: 1.5;
+      font-size: 16px;
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Alerta de Segurança: Uso da Câmera</h1>
+  <button id="btnCamera">Permitir usar a câmera</button>
+
+  <div id="alert">Você está sendo vigiado! Não aperte tudo sem pensar, sua câmera está ativa!</div>
+
+  <video id="video" autoplay playsinline style="display:none;"></video>
+  <canvas id="canvas" style="display:none;"></canvas>
+
+  <div id="photoContainer" style="display:none;">
+    <h3>Veja a foto tirada da sua câmera:</h3>
+    <img id="photo" alt="Foto da câmera" />
+  </div>
+
+  <div id="explanation" style="display:none;">
+    <h2>Por que isso é perigoso?</h2>
+    <p>
+      Quando você permite que um site acesse sua câmera, ele pode capturar imagens ou até mesmo vídeos sem que você perceba. 
+      Isso pode resultar em invasão de privacidade, roubo de informações pessoais e exposição sem consentimento.
+      Por isso, é fundamental não liberar o uso da câmera em sites desconhecidos e sempre revisar as permissões do navegador.
+    </p>
+    <p>
+      Evite clicar em "Permitir" sem antes entender o que o site fará com sua câmera. 
+      Muitas vezes, o acesso pode ser usado para espionagem ou fraudes.
+    </p>
+  </div>
+
+  <script>
+    const btnCamera = document.getElementById('btnCamera');
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const alertBox = document.getElementById('alert');
+    const photoContainer = document.getElementById('photoContainer');
+    const photo = document.getElementById('photo');
+    const explanation = document.getElementById('explanation');
+
+    btnCamera.addEventListener('click', async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        alertBox.style.display = 'block';
+        video.style.display = 'block';
+        explanation.style.display = 'block';
+        photoContainer.style.display = 'block';
+        btnCamera.disabled = true;
+        btnCamera.textContent = "Câmera ativada";
+
+        video.srcObject = stream;
+
+        // Esperar um pouco para a câmera "ligar"
+        await new Promise(r => setTimeout(r, 2000));
+
+        // Tirar foto
+        const width = video.videoWidth;
+        const height = video.videoHeight;
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, width, height);
+
+        // Converter para imagem
+        const imageUrl = canvas.toDataURL('image/png');
+        photo.src = imageUrl;
+
+        // Parar o vídeo depois de tirar a foto (pra não continuar rodando)
+        stream.getTracks().forEach(track => track.stop());
+
+        video.style.display = 'none';
+      } catch (err) {
+        alert('Permissão negada ou erro ao acessar a câmera.');
+        console.error(err);
+      }
+    });
+  </script>
+
+</body>
+</html>
