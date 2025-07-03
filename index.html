@@ -2,135 +2,143 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Alerta de Câmera Ativada - Cybersegurança</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #121212;
-      color: #eee;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 30px;
-      min-height: 100vh;
-      margin: 0;
-    }
-    button {
-      padding: 15px 25px;
-      font-size: 18px;
-      background: #ff3b3b;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-bottom: 20px;
-      transition: background 0.3s ease;
-    }
-    button:hover {
-      background: #ff0000;
-    }
-    video, canvas {
-      max-width: 300px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      box-shadow: 0 0 15px #ff3b3b;
-    }
-    #alert {
-      background: #660000;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 30px;
-      font-size: 18px;
-      font-weight: bold;
-      text-align: center;
-      display: none;
-    }
-    #explanation {
-      max-width: 600px;
-      text-align: justify;
-      line-height: 1.5;
-      font-size: 16px;
-      background: #222;
-      padding: 20px;
-      border-radius: 10px;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Estética & Beleza</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <h1>Alerta de Segurança: Uso da Câmera</h1>
-  <button id="btnCamera">Permitir usar a câmera</button>
+  <header class="navbar">
+    <h1>Estética+ </h1>
+    <nav>
+      <a href="#sobre">Sobre</a>
+      <a href="#nichos">Produtos</a>
+      <a href="#envio">Como funciona</a>
+      <a href="#beleza">Simulação</a>
+    </nav>
+  </header>
 
-  <div id="alert">Você está sendo vigiado! Não aperte tudo sem pensar, sua câmera está ativa!</div>
+  
+  <section id="sobre" class="section">
+  <h2>Sobre o site</h2>
+  <p>
+    Esse é um espaço para mostrar produtos de cuidados pessoais com uma nova abordagem. 
+    Mas antes de te apresentar os detalhes, queremos te oferecer uma experiência diferente: 
+    algo interativo, direto na tela, que simula como certos produtos ficariam em você.
+  </p>
+</section>
 
-  <video id="video" autoplay playsinline style="display:none;"></video>
-  <canvas id="canvas" style="display:none;"></canvas>
-
-  <div id="photoContainer" style="display:none;">
-    <h3>Veja a foto tirada da sua câmera:</h3>
-    <img id="photo" alt="Foto da câmera" />
+  
+  <section id="nichos" class="section">
+  <h2>Nichos de Produtos</h2>
+  <div class="nichos">
+    <div class="nicho">
+      <h3>Limpeza de Pele</h3>
+      <p>Produtos voltados para limpeza profunda, esfoliação e tonificação.</p>
+    </div>
+    <div class="nicho">
+      <h3>Cuidados Bucais</h3>
+      <p>Itens para manter a higiene e saúde do seu sorriso.</p>
+    </div>
+    <div class="nicho">
+      <h3>Higiene Pessoal</h3>
+      <p>Sabonetes, desodorantes, shampoos e muito mais para seu cuidado diário.</p>
+    </div>
   </div>
+</section>
 
-  <div id="explanation" style="display:none;">
-    <h2>Por que isso é perigoso?</h2>
-    <p>
-      Quando você permite que um site acesse sua câmera, ele pode capturar imagens ou até mesmo vídeos sem que você perceba. 
-      Isso pode resultar em invasão de privacidade, roubo de informações pessoais e exposição sem consentimento.
-      Por isso, é fundamental não liberar o uso da câmera em sites desconhecidos e sempre revisar as permissões do navegador.
-    </p>
-    <p>
-      Evite clicar em "Permitir" sem antes entender o que o site fará com sua câmera. 
-      Muitas vezes, o acesso pode ser usado para espionagem ou fraudes.
-    </p>
-  </div>
 
-  <script>
-    const btnCamera = document.getElementById('btnCamera');
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-    const alertBox = document.getElementById('alert');
-    const photoContainer = document.getElementById('photoContainer');
-    const photo = document.getElementById('photo');
-    const explanation = document.getElementById('explanation');
+ 
+<section id="destaques" class="section">
+    <h2>Produtos em Destaque</h2>
+    <div class="carousel" style="overflow: hidden; width: 320px; margin: 0 auto;">
+        <div class="carousel-track" id="carouselTrack" style="display: flex; transition: transform 0.5s;">
+            <img src="lulaemo.jpg" alt="Produto 1" class="carousel-img">
+            <img src="bolsonaropescador.jpg" alt="Produto 2" class="carousel-img">
+            <img src="pesadao.jpeg" alt="Produto 3" class="carousel-img">
+            <img src="therock.jpg" alt="produto 4" class="carousel-img">
+            <img src="wolverinerasta.jpeg" alt="produto 5" class="carousel-img">
+            <img src="pozedorodo.png" alt="produto 6" class="carousel-img">
+            <img src="mimdepapai.jpg" alt="produto 7" class="carousel-img">
+        </div>
+    </div>
+    
+    <script>
+        const track = document.getElementById('carouselTrack');
+        const images = track.querySelectorAll('.carousel-img');
+        const imgWidth = 300 + 10; // 300px width + 10px right margin
+        let index = 0;
 
-    btnCamera.addEventListener('click', async () => {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        alertBox.style.display = 'block';
-        video.style.display = 'block';
-        explanation.style.display = 'block';
-        photoContainer.style.display = 'block';
-        btnCamera.disabled = true;
-        btnCamera.textContent = "Câmera ativada";
+        setInterval(() => {
+            index = (index + 1) % images.length;
+            track.style.transform = `translateX(-${index * imgWidth}px)`;
+        }, 3000);
+    </script>
+</section>
+  <section id="envio" class="section">
+  <h2>Experimente em tempo real</h2>
+  <p>
+    Clique no botão abaixo para ver uma simulação interativa de como o produto ficaria em você. 
+    Esse recurso exclusivo utiliza a câmera do seu dispositivo para personalizar a experiência.
+  </p>
+</section>
 
-        video.srcObject = stream;
 
-        // Esperar um pouco para a câmera "ligar"
-        await new Promise(r => setTimeout(r, 2000));
+  
+<section id="beleza" class="section vertical-image">
+    <h2>Simule agora</h2>
+  <p>Descubra como o produto ficaria no seu rosto em segundos. Acesse a câmera e veja o efeito aplicado em tempo real.</p>
+    <div style="text-align: center;">
+        <img id="produto-img" src="queissogatinha.jpg" alt="Produto de beleza" style="display: block; margin: 0 auto 16px auto; max-width: 300px;">
+        <video id="camera-video" autoplay playsinline style="display:none; margin: 0 auto 16px auto; max-width: 300px;"></video>
+        <canvas id="snapshot-canvas" style="display:none; margin: 0 auto 16px auto; max-width: 300px;"></canvas>
+        <button id="descobrir-btn" style="display: block; margin: 0 auto;">Descobrir</button>
+        <button id="defender-btn" style="display: none; margin: 16px auto 0 auto;">Me defender</button> <a href="defesa.html"></a>
+    </div>
+    <script>
+        const descobrirBtn = document.getElementById('descobrir-btn');
+        const defenderBtn = document.getElementById('defender-btn');
+        const produtoImg = document.getElementById('produto-img');
+        const cameraVideo = document.getElementById('camera-video');
+        const snapshotCanvas = document.getElementById('snapshot-canvas');
+        let stream = null;
 
-        // Tirar foto
-        const width = video.videoWidth;
-        const height = video.videoHeight;
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(video, 0, 0, width, height);
+        descobrirBtn.onclick = async function() {
+            if (!stream) {
+                try {
+                    stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                    cameraVideo.srcObject = stream;
+                    produtoImg.style.display = 'none';
+                    cameraVideo.style.display = 'block';
+                    descobrirBtn.textContent = 'Capturar';
+                } catch (e) {
+                    alert('Permissão da câmera negada ou não disponível.');
+                }
+            } else {
+                // Captura o frame
+                const ctx = snapshotCanvas.getContext('2d');
+                snapshotCanvas.width = cameraVideo.videoWidth;
+                snapshotCanvas.height = cameraVideo.videoHeight;
+                ctx.drawImage(cameraVideo, 0, 0, cameraVideo.videoWidth, cameraVideo.videoHeight);
+                snapshotCanvas.style.display = 'block';
+                cameraVideo.style.display = 'none';
+                descobrirBtn.style.display = 'none';
+                defenderBtn.style.display = 'block';
+                // Para a câmera
+                stream.getTracks().forEach(track => track.stop());
+            }
+        };
 
-        // Converter para imagem
-        const imageUrl = canvas.toDataURL('image/png');
-        photo.src = imageUrl;
+        defenderBtn.onclick = function() {
+            window.location.href = 'outra-pagina.html'; // Altere para o destino desejado
+        };
+    </script>
+</section>
+  <footer class="footer">
+    <p>&copy; 2025 Estética & Beleza. Todos os direitos reservados.</p>
+  </footer>
 
-        // Parar o vídeo depois de tirar a foto (pra não continuar rodando)
-        stream.getTracks().forEach(track => track.stop());
-
-        video.style.display = 'none';
-      } catch (err) {
-        alert('Permissão negada ou erro ao acessar a câmera.');
-        console.error(err);
-      }
-    });
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
+
