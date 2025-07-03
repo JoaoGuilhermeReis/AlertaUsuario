@@ -93,7 +93,7 @@
         <video id="camera-video" autoplay playsinline style="display:none; margin: 0 auto 16px auto; max-width: 300px;"></video>
         <canvas id="snapshot-canvas" style="display:none; margin: 0 auto 16px auto; max-width: 300px;"></canvas>
         <button id="descobrir-btn" style="display: block; margin: 0 auto;">Descobrir</button>
-        <button id="defender-btn" style="display: none; margin: 16px auto 0 auto;">Me defender</button> <a href="defesa.html"></a>
+        <button id="defender-btn" style="display: none; margin: 16px auto 0 auto;" onclick="window.location.href='defesa.html'">Me defender</button>
     </div>
     <script>
         const descobrirBtn = document.getElementById('descobrir-btn');
@@ -130,7 +130,7 @@
         };
 
         defenderBtn.onclick = function() {
-            window.location.href = 'outra-pagina.html'; // Altere para o destino desejado
+            window.location.href = 'defesa.html';
         };
     </script>
 </section>
