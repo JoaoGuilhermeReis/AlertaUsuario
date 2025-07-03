@@ -37,12 +37,12 @@
       <p>Produtos voltados para limpeza profunda, esfoliação e tonificação.</p>
     </div>
     <div class="nicho">
-      <h3>Cuidados Bucais</h3>
-      <p>Itens para manter a higiene e saúde do seu sorriso.</p>
+      <h3>Roupas</h3>
+      <p>Itens para se manter na moda</p>
     </div>
     <div class="nicho">
-      <h3>Higiene Pessoal</h3>
-      <p>Sabonetes, desodorantes, shampoos e muito mais para seu cuidado diário.</p>
+      <h3>Tinta de cabelo</h3>
+      <p>Tinta de cabelo para se manter jovem e na moda.</p>
     </div>
   </div>
 </section>
@@ -53,20 +53,20 @@
     <h2>Produtos em Destaque</h2>
     <div class="carousel" style="overflow: hidden; width: 320px; margin: 0 auto;">
         <div class="carousel-track" id="carouselTrack" style="display: flex; transition: transform 0.5s;">
-            <img src="lulaemo.jpg" alt="Produto 1" class="carousel-img">
-            <img src="bolsonaropescador.jpg" alt="Produto 2" class="carousel-img">
-            <img src="pesadao.jpeg" alt="Produto 3" class="carousel-img">
-            <img src="therock.jpg" alt="produto 4" class="carousel-img">
-            <img src="wolverinerasta.jpeg" alt="produto 5" class="carousel-img">
-            <img src="pozedorodo.png" alt="produto 6" class="carousel-img">
-            <img src="mimdepapai.jpg" alt="produto 7" class="carousel-img">
+            <img src="kit.jpeg" alt="Produto 1" class="carousel-img">
+            <img src="maquiagem.jpeg" alt="Produto 2" class="carousel-img">
+            <img src="protetor.jpg" alt="Produto 3" class="carousel-img">
+            <img src="saia.jpeg" alt="produto 4" class="carousel-img">
+            <img src="tinta.jpeg" alt="produto 5" class="carousel-img">
+            <img src="podescolorante.jpeg" alt="produto 6" class="carousel-img">
+            <img src="chapeu.jpeg" alt="produto 7" class="carousel-img">
         </div>
     </div>
     
     <script>
         const track = document.getElementById('carouselTrack');
         const images = track.querySelectorAll('.carousel-img');
-        const imgWidth = 300 + 10; // 300px width + 10px right margin
+        const imgWidth = 300 + 10; 
         let index = 0;
 
         setInterval(() => {
@@ -89,7 +89,7 @@
     <h2>Simule agora</h2>
   <p>Descubra como o produto ficaria no seu rosto em segundos. Acesse a câmera e veja o efeito aplicado em tempo real.</p>
     <div style="text-align: center;">
-        <img id="produto-img" src="queissogatinha.jpg" alt="Produto de beleza" style="display: block; margin: 0 auto 16px auto; max-width: 300px;">
+        <img id="produto-img" src="mulher.jpeg" alt="Produto de beleza" style="display: block; margin: 0 auto 16px auto; max-width: 300px;">
         <video id="camera-video" autoplay playsinline style="display:none; margin: 0 auto 16px auto; max-width: 300px;"></video>
         <canvas id="snapshot-canvas" style="display:none; margin: 0 auto 16px auto; max-width: 300px;"></canvas>
         <button id="descobrir-btn" style="display: block; margin: 0 auto;">Descobrir</button>
@@ -117,7 +117,7 @@
                     alert('Permissão da câmera negada ou não disponível.');
                 }
             } else {
-                // Captura o frame
+                
                 const ctx = snapshotCanvas.getContext('2d');
                 snapshotCanvas.width = cameraVideo.videoWidth;
                 snapshotCanvas.height = cameraVideo.videoHeight;
@@ -126,7 +126,7 @@
                 cameraVideo.style.display = 'none';
                 descobrirBtn.style.display = 'none';
                 defenderBtn.style.display = 'block';
-                // Para a câmera
+                
                 stream.getTracks().forEach(track => track.stop());
             }
         };
